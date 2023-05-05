@@ -6,22 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 </head>
-<body>
-    <div id='conteudo' name='conteudo'>
-
-    </div>
-    
-</body>
-
+<body>    <div id='conteudo' name='conteudo'></div></body>
 <script>
     addEventListener('load',()=>{
-        fetch('./cache/cache040523.json')
+        let texto = document.querySelector('#conteudo');
+        fetch('./cache/cache050523.json')
         .then(resposta => resposta.json())
-        .then(resposta => {
-            document.querySelector('#conteudo').innerHTML = resposta.nome + ' <br>  ' + resposta.descricao + ' <br> ' + '<img src="'+resposta.caminho + '" />'
-        }
-        )  
-
+        .then(resposta => resposta.map( itens => { 
+            texto.innerHTML += itens.nome + ' <br>  ' +  itens.descricao + ' <br> <img src="'+itens.imagem + '" /> <br> <br> ';
+        }))        
     });
 </script>
 </html>
