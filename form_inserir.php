@@ -19,8 +19,6 @@
                 <tr><td colspan="2"> <input type="button" value="Cadastrar" name="btn_cadastrar" id="btn_cadastrar"></td></tr>
             </form>
         </table>
-     
-    
     </div>
 </body>
 <script>
@@ -33,7 +31,6 @@
                 body: dados})
             .then((response) => response.json())
             .then(response => console.log(response));
-
         });
     </script>
 </html>
