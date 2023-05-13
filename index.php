@@ -17,7 +17,7 @@
     addEventListener('load',()=>{
         fetch('./cache/cache040523.json')
         .then(resposta => resposta.json())
-        .then(resposta => {
+        .then(resposta => { 
             document.querySelector('#conteudo').innerHTML = resposta.nome + ' <br>  ' + resposta.descricao + ' <br> ' + '<img src="'+resposta.caminho + '" />'
         }
         )  
