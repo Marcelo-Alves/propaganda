@@ -1,29 +1,40 @@
 <?php
+ini_set("display_errors", 1);
+include_once '../modelo/inserir.php';
+include_once '../modelo/cache.php';
    
-    try{
+try{
+    $nome_img= $_FILES["img"]["name"];
+    $extensao = pathinfo($nome_img);
+    $ext = $extensao['extension'];
+    $type= $_FILES["img"]["type"];
+    $size= $_FILES["img"]["size"];
+    $temp= $_FILES["img"]["tmp_name"];
+    $error= $_FILES["img"]["error"];
+    $post = array();
 
+    $nome_imagem ='img'.date('dmyhms'). '-' . random_int(100,9999);
+    $caminho_imagem = DIR_UPLOAD . $nome_imagem .'.'.$ext;
+    move_uploaded_file($temp, $caminho_imagem);
+    
+    $nome_campo = 'imagem,' ;
+    $valores = '"'.$nome_imagem.'.'.$ext.'",';
 
-        $nome= $_FILES["img"]["name"];
-        $extensao = pathinfo($nome);
-        $ext = $extensao['extension'];
-        $type= $_FILES["img"]["type"];
-        $size= $_FILES["img"]["size"];
-        $temp= $_FILES["img"]["tmp_name"];
-        $error= $_FILES["img"]["error"];
-
-        $caminho = $_SERVER['DOCUMENT_ROOT'].'/visao/img_up/img'.date('dmy').'.'.$ext;
-        $caminho2 = '/visao/img_up/img'.date('dmy').'.'.$ext;
-        move_uploaded_file($temp, $caminho);
-        $arquivo =array('nome'=>$_POST['nome'],'descricao'=>$_POST['descricao'],"caminho" => $caminho2);
-        ob_clean();
-            echo json_encode($arquivo);
-        $cache = ob_get_contents();
-        ob_end_clean();
-        file_put_contents($_SERVER['DOCUMENT_ROOT'].'/cache/cache'.date('dmy').'.json',$cache);
-
+    foreach($_POST as $nome_post => $valor){
+        $nome_campo .= $nome_post.',' ;
+        $valores .= '"'.$valor.'",';
     }
-        catch(Exception $e){
-        echo json_encode(array('erro'=> $e->getMessage()));
-    }
+
+    $nome_campo = substr($nome_campo,0,-1);
+    $valores  = substr($valores,0,-1);
+
+    inserir::inserirBanco('publicidade',$nome_campo,$valores);
+
+    cache::buscaTudo();
+
+}
+catch(Exception $e){
+    echo json_encode(array('erro'=> $e->getMessage()));
+}
 
 ?>

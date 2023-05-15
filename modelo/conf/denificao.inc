@@ -1,7 +1,9 @@
 <?PHP
 date_default_timezone_set("UTC");
-const LINK    = 'localhost';
-const USUARIO = 'root';
-const SENHA   = 'indios';
-const BANCO   = 'propaganda';
+define('LINK', 'localhost');
+define('USUARIO', 'root');
+define('SENHA', 'indios');
+define('BANCO', 'propaganda');
+define('DIR_CACHE', $_SERVER['DOCUMENT_ROOT'].'/cache/cache.json');
+define('DIR_UPLOAD', $_SERVER['DOCUMENT_ROOT'].'/visao/img_up/') ;
 ?>

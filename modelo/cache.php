@@ -1,29 +1,26 @@
 <?php
+include_once 'conf/denificao.inc';
 include_once 'mysql.php';
 class cache  {   
         
-    public static function buscaTudo($campo,$tabela,$ordem =null) {
+    public static function buscaTudo() {
         try {
-            $sql= "SELECT $campo FROM $tabela $ordem ;";
+            $sql= "SELECT id,descricao,UPPER(nome) as nome,imagem FROM propaganda.publicidade p 
+                            WHERE DATE_FORMAT(now(),'%Y-%m-%d') between p.data_inicio and p.data_fim 
+                            ORDER BY rand()";
+
             $rs = mysql::conexao()->prepare($sql);  
             $rs->execute();
             $dados=$rs->fetchAll(PDO::FETCH_OBJ);
-            //echo $sql;
-            return $dados;
-        } catch (Exception $ex) {
-            echo $ex->getMessage(). " Erro sql ". $sql;
-        }        
-    }
-    public static function buscaWhere($campo,$tabela,$where,$ordem =null) {
-        try {
-            $sql= "SELECT $campo FROM $tabela WHERE $where $ordem;";
-			//echo $sql;
-			$rs = mysql::conexao()->prepare($sql);  
-            $rs->execute();
-            $dados=$rs->fetchAll(PDO::FETCH_OBJ);
-            return $dados;
+            
+            $cache = json_encode($dados);
+
+            $arquivo = fopen(DIR_CACHE,'w');
+            fwrite($arquivo, $cache);
+            fclose($arquivo);
         } catch (Exception $ex) {
             echo $ex->getMessage(). " Erro sql ". $sql;
         }        
     }
 }
+cache::buscaTudo();
