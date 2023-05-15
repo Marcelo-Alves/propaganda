@@ -6,32 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <style>
-  #conteudo {
-    margin: 0 auto;
-    width: 80%;
-    height: 80%;
-    overflow-y: scroll;
-  }
+        #conteudo {
+            margin: 0 auto;
+            padding: 10px;
+            width: 80%;
+            height: 80%;
+            overflow-y: scroll;
+            border: 1px solid #000000;
+        }
+        #conteudo img{
+            margin-top: 5px;
+            padding: 5px;
+        }
 </style>
-
-
 </head>
 <body>
+    <div id="datas"></div>
     <div id='conteudo' name='conteudo'>
-
     </div>
     
 </body>
-
 <script>
-    addEventListener('load',()=>{
-        fetch('./cache/cache040523.json')
-        .then(resposta => resposta.json())
-        .then(resposta => {
-            document.querySelector('#conteudo').innerHTML = resposta.nome + ' <br>  ' + resposta.descricao + ' <br> ' + '<img src="'+resposta.caminho + '" />'
-        }
-        )  
+    
+    const dia = () => {
+        const hoje  = new Date();
+        const ano = hoje.getFullYear().toString().substr(-2);
+        const dia = hoje.getDate().toString().padStart(2,'0')
+        const mes = String(hoje.getMonth() + 1).padStart(2,'0')
+        return "cache" + dia + mes + ano +'.json'
+    }
 
-    });
+    const conteudo = document.querySelector('#conteudo')
+
+    const carregar = fetch('./cache/'+dia())
+        .then(resposta => resposta.json()) 
+        .then(resposta => resposta.map(itens => {              
+            conteudo.innerHTML += itens.nome + 
+            ' <br>  ' + itens.descricao + ' <br> ' + '<img src="'+itens.caminho + '" width=400 /> <br><br>'
+        }));
 </script>
 </html>
