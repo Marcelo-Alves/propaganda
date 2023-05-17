@@ -1,8 +1,7 @@
 <?php
 include_once 'conf/denificao.inc';
 include_once 'mysql.php';
-class cache  {   
-        
+class cache  { 
     public static function buscaTudo() {
         try {
             $sql= "SELECT id,descricao,UPPER(nome) as nome,imagem FROM propaganda.publicidade p 
@@ -19,7 +18,7 @@ class cache  {
             fwrite($arquivo, $cache);
             fclose($arquivo);
         } catch (Exception $ex) {
-            echo $ex->getMessage(). " Erro sql ". $sql;
+            echo json_encode(array("erro" => $ex->getMessage(). " Erro sql ". $sql));
         }        
     }
 }

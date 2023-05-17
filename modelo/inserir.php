@@ -9,9 +9,7 @@ class inserir  {
             $rs->execute();		
             
         } catch (Exception $ex) {
-            echo $ex->getMessage();
-            echo "<br>";
-            echo " Erro sql ". $sql;
+            echo json_encode(array("erro" => $ex->getMessage(). " Erro sql ". $sql));
         }        
     }
     

@@ -1,5 +1,4 @@
 <?php
-ini_set("display_errors", 1);
 include_once '../modelo/inserir.php';
 include_once '../modelo/cache.php';
    
@@ -12,7 +11,6 @@ try{
     $temp= $_FILES["img"]["tmp_name"];
     $error= $_FILES["img"]["error"];
     $post = array();
-
     $nome_imagem ='img'.date('dmyhms'). '-' . random_int(100,9999);
     $caminho_imagem = DIR_UPLOAD . $nome_imagem .'.'.$ext;
     move_uploaded_file($temp, $caminho_imagem);
@@ -27,14 +25,12 @@ try{
 
     $nome_campo = substr($nome_campo,0,-1);
     $valores  = substr($valores,0,-1);
-
     inserir::inserirBanco('publicidade',$nome_campo,$valores);
-
     cache::buscaTudo();
 
 }
 catch(Exception $e){
-    echo json_encode(array('erro'=> $e->getMessage()));
+    echo json_encode(array("erro" => $ex->getMessage(). " Erro sql ". $sql));
 }
 
 ?>
