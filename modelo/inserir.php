@@ -7,9 +7,11 @@ class inserir  {
             $sql= "INSERT INTO $tabela ($campos) values ($valores);";
             $rs = mysql::conexao()->prepare($sql);  			
             $rs->execute();		
+            //return mysql::conexao()->lastInsertId();
+
             
         } catch (Exception $ex) {
-            echo json_encode(array("erro" => $ex->getMessage(). " Erro sql ". $sql));
+            echo json_encode(array("erro" =>"1","mensagem"=>"Erro no valor de insereção","cor"=>"FF0000"));
         }        
     }
     

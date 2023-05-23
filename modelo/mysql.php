@@ -8,8 +8,7 @@ class mysql {
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $conn;
         } catch (Exception $e) {
-          print "Ocorreu um erro ao tentar executar esta ação, <br>
-          foi gerado um LOG do mesmo, tente novamente mais tarde. <br>" . $e->getMessage();
+            echo json_encode(array("erro" =>"1","mensagem"=>"Erro ao conectar ao Banco","cor"=>"#FF0000"));
       }
     }
 }

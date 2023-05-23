@@ -13,12 +13,20 @@ btn_cadastrar.addEventListener('click',() =>{
 
     const dia = new Date()
     const hoje = dia.getFullYear() +'-'+String(dia.getMonth() + 1).padStart(2,'0') +'-'+dia.getDate()
-    const formulario = document.forms.namedItem('gravar');            
-    let dados = new FormData(formulario);
+    const formulario = document.forms.namedItem('gravar')          
+    let dados = new FormData(formulario)
     dados.append('data_publicado',hoje)
-    const inserir = async () => {
-        await fetch('/controle/inserir.php', {method: 'POST', body: dados});
-        formulario.reset();
+
+    async function inserir ()  {
+        await fetch('../../controle/inserir.php', {method: 'POST',headers: {'Content-Type': 'application/json'}, body: dados})
+        .then(resposta => resposta.json())
+        .then(resposta => {         
+         
+            document.querySelector("#mensagem").innerHTML ='<h3> '+resposta.mensagem+' </h3>';
+            document.querySelector("#mensagem").style.color = resposta.cor;
+            resposta.erro == "0" ?  formulario.reset(): null;
+            
+        });        
     }
     inserir();
 });
