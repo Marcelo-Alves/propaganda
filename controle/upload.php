@@ -1,14 +1,11 @@
 <?php
-include_once '../modelo/conf/denificao.inc';
+include_once '../modelo/conf/definicao.inc';
 
 
 class upload{
 
     public static function Gravar($arquivo,$indece){
-        //echo "<pre>";
-       // print_r($arquivo);
-      ///*
-      
+             
         $ext =   explode('.', $arquivo["name"][$indece]);
         //$type=  array($_FILES["img"]["type"]);
         //$size=  array($_FILES["img"]["size"]);
@@ -22,7 +19,6 @@ class upload{
         }   
 
         return $nome_imagem .'.'.$ext[1];
-//*/
         
     }
 }

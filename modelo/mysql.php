@@ -1,5 +1,5 @@
 <?php
-include_once 'conf/denificao.inc';
+include_once 'conf/definicao.inc';
 
 class mysql {
     public static function conexao(){

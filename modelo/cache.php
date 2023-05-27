@@ -1,5 +1,5 @@
 <?php
-include_once 'conf/denificao.inc';
+include_once 'conf/definicao.inc';
 include_once 'mysql.php';
 class cache  { 
     public static function buscaTudo() {
