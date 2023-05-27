@@ -4,9 +4,7 @@ include_once 'mysql.php';
 class cache  { 
     public static function buscaTudo() {
         try {
-            $sql= "SELECT id,descricao,UPPER(nome) as nome FROM propaganda.publicidade p 
-                            WHERE DATE_FORMAT(now(),'%Y-%m-%d') between p.data_inicio and p.data_fim 
-                            ORDER BY rand()";
+            $sql= "SELECT * FROM propaganda.publicado p";
 
             $rs = mysql::conexao()->prepare($sql);  
             $rs->execute();
@@ -14,7 +12,7 @@ class cache  {
             
             $cache = json_encode($dados);
 
-            $arquivo = fopen(DIR_CACHE,'w');
+            $arquivo = fopen('/mnt/d/teste/php/propaganda/cache/cache.json','w');
             fwrite($arquivo, $cache);
             fclose($arquivo);
         } catch (PDOException $ex) {

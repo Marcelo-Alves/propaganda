@@ -16,11 +16,12 @@
             <h3 id="mensagem"></h3>
         </div>
         <table>
-            <form name="gravar">
+            <form name="gravar" enctype="multipart/form-data">
                 <tr><td>Nome  </td><td><input type="text" name="nome" id="nome"></td></tr>
-                <tr><td>IMAGEM</td><td><input type="file" name="img" id="img"></td></tr>
+                <tr><td>IMAGEM</td>
+                <td><input type="file" name="img[]" id="img" accept=".jpg, .jpeg, .png, .gif" multiple="multiple" /></td></tr>
                 
-                <input type="hidden" name="data_publicado" id="data_fim" value="2023-05-15">
+                <input type="hidden" name="data_publicado" id="data_fim" value="2023-05-26">
                 <input type="hidden" name="idusuario" id="idusuario" value="1">
                 <tr><td>Descrição</td><td><textarea name="descricao" id="descricao" cols="30" rows="10"></textarea></td></tr>
                 <tr><td>Data Inicio</td><td><input type="date" name="data_inicio" id="data_inicio" ></td></tr>
