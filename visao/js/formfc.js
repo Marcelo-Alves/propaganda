@@ -17,8 +17,8 @@ btn_cadastrar.addEventListener('click',() =>{
     let dados = new FormData(formulario)
     dados.append('data_publicado',hoje)
     console.log(dados)
-    function inserir ()  {
-         fetch('../../controle/inserir.php', {method: 'POST', body: dados})
+    async function inserir ()  {
+        await fetch('../../controle/inserir.php', {method: 'POST', body: dados})
         .then(resposta => resposta.json())
         .then(resposta => {         
          
