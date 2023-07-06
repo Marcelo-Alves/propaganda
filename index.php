@@ -1,26 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link id="favicon">
-    <title>Home</title>
-    <link rel="stylesheet" href="visao/css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<?php
+    include('./modelo/conf/definicao.inc');
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    $url = ($_SERVER['REQUEST_URI']=="/"?"/index":$_SERVER['REQUEST_URI']);
+    $u = explode('/',$url);
+    $prexcaminho='';
+    $prexclasse='';
+    $classe  = $u[1];
+    $metodo =  $u[2];
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    $pastas = array('painel','admin');
 
-    <script src="visao/js/indexfc.js" defer></script>
-</head>
-<body>
-    <div id='conteudo' name='conteudo'>
-        <div id="carouselExampleDark" class="carousel carousel-fade slide text-center" data-bs-ride="carousel">         
-        </div>
-    </div>   
-</body>
+    if(count($u) > 2 &&  in_array($u[1],$pastas) ){
+        $classe  = $u[1];
+        $metodo = $u[2]==""?'index':$u[2]; 
+    }
+   
+    if(file_exists('./controle/'.$classe.".php") == true)
+    {
+        include_once('./controle/'.$classe.".php") ;
 
-</html>
+        if(method_exists($classe,$metodo))
+        {
+            $classe::$metodo();
+        }
+    }
+
+    if(file_exists('./visao/'.$classe.'/'.$metodo.".php") == true)
+    {
+        include_once('./visao/'.$classe.'/'.$metodo.'.php' );
+
+    }
+    elseif(file_exists('./visao/'.$classe.".php") == true)
+    {	
+        include_once('./visao/'.$classe.".php" );
+    }
+    else{
+        include_once("404.html" );
+    }
+
+?>

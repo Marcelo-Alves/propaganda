@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Propaganda </title>
-    <script src="visao/js/formfc.js" defer></script>
+    <script src="../visao/js/formfc.js" defer></script>
 </head>
 <body>
     <div>
@@ -31,7 +31,4 @@
         </table>
     </div>
 </body>
-<script>
-      
-    </script>
 </html>

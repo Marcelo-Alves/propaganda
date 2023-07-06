@@ -38,7 +38,7 @@
     for(const imagem of arrayvariavel){
         const div = document.createElement('div');
         const img = document.createElement('img');
-        
+        div.setAttribute('style','width:400px !important;border:1px solid #000000;');
 
         div.setAttribute("class","carousel-item "+ativo);
         div.setAttribute("data-bs-interval","2000");
@@ -53,6 +53,14 @@
 carregar();
 
 </script>
+<?php
+echo "<pre>";
+print_r($_SERVER);
+echo "</pre>";
+echo '<br>' ;
+$retirar = [$_SERVER['DOCUMENT_ROOT'].'/','.php'];
+echo str_replace($retirar,'', $_SERVER['SCRIPT_FILENAME']);
 
+?>
 </body>
 </html> 
