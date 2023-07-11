@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Propaganda </title>
-    <script src="../visao/js/formfc.js" defer></script>
-</head>
-<body>
+<?php
+include_once('./visao/painel/template/cabecario.php');
+include_once('./visao/painel/template/topo.php');
+?>
+
     <div>
         <div>
             <h1>Cadastro de Propaganda</h1>
@@ -30,5 +25,7 @@
             </form>
         </table>
     </div>
-</body>
-</html>
+<?php
+include_once('./visao/painel/template/rodape.php');
+
+?>

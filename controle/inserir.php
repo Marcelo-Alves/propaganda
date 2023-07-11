@@ -31,4 +31,3 @@ try{
 catch(Exception $e){
     echo json_encode(array("erro" =>"1","mensagem"=>"Erro ao cadastrar no Banco ou de subir a imagem","cor"=>"#FF0000"));
 }
-?>

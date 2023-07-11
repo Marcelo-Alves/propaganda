@@ -31,7 +31,7 @@
 </div>
 
 <script>
-  function carregar() {
+ /* function carregar() {
 
     let arrayvariavel = ['img270523120523-598.jpg','img270523120550-5005.jpg','img270523120550-6888.jpg'];
     let ativo ='active';
@@ -50,15 +50,18 @@
         ativo='';
     }
   }
-carregar();
+carregar();*/
 
 </script>
 <?php
+
+//phpinfo();
+
 echo "<pre>";
 print_r($_SERVER);
 echo "</pre>";
 echo '<br>' ;
-$retirar = [$_SERVER['DOCUMENT_ROOT'].'/','.php'];
+$retirar = [$_SERVER['PHP_CLI_SERVER_WORKERS'].'/','.php'];
 echo str_replace($retirar,'', $_SERVER['SCRIPT_FILENAME']);
 
 ?>

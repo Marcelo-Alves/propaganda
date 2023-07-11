@@ -1,18 +1,16 @@
 <?php
     include('./modelo/conf/definicao.inc');
 
-    $url = ($_SERVER['REQUEST_URI']=="/"?"/index":$_SERVER['REQUEST_URI']);
+    $url = ($_SERVER['REQUEST_URI']=="/"?"/index":$_SERVER['REQUEST_URI']."/");
     $u = explode('/',$url);
-    $prexcaminho='';
-    $prexclasse='';
+
     $classe  = $u[1];
-    $metodo =  $u[2];
 
     $pastas = array('painel','admin');
 
-    if(count($u) > 2 &&  in_array($u[1],$pastas) ){
+    if(isset($u[2]) &&  in_array($u[1],$pastas) ){
         $classe  = $u[1];
-        $metodo = $u[2]==""?'index':$u[2]; 
+        $metodo = ($u[2] == null )? 'index' : $u[2]; 
     }
    
     if(file_exists('./controle/'.$classe.".php") == true)
@@ -37,5 +35,3 @@
     else{
         include_once("404.html" );
     }
-
-?>
