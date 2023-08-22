@@ -1,6 +1,6 @@
 <?php
 class admin{
-    function index() {
+    public static function index() {
         print "Ola de dentro controler admin";
     }
 

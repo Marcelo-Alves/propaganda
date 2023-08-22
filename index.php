@@ -1,10 +1,26 @@
 <?php
     include('./modelo/conf/definicao.inc');
 
-    $url = ($_SERVER['REQUEST_URI']=="/"?"/index":$_SERVER['REQUEST_URI']."/");
+    $url =  $_SERVER['REQUEST_URI'].'/';
+    
+
+    if("/" === $_SERVER['REQUEST_URI']){
+        $url = "/index";
+    }
+    
+   /* echo "<br> <pre>";
+
+    print_r($url);
+    echo "<br> <br> ";
+    print_r($_SERVER['REQUEST_URI']);
+    echo "<br> <br> ";
+    echo ($_SERVER['REQUEST_URI']);
+    echo "<pre><br>";*/
+
     $u = explode('/',$url);
 
     $classe  = $u[1];
+    $metodo="";
 
     $pastas = array('painel','admin');
 

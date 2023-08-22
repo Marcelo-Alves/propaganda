@@ -61,8 +61,6 @@ echo "<pre>";
 print_r($_SERVER);
 echo "</pre>";
 echo '<br>' ;
-$retirar = [$_SERVER['PHP_CLI_SERVER_WORKERS'].'/','.php'];
-echo str_replace($retirar,'', $_SERVER['SCRIPT_FILENAME']);
 
 ?>
 </body>
